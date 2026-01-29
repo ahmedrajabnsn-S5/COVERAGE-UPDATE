@@ -758,6 +758,37 @@
   </div>
 
 <script>
+  
+  // ========= SharePoint Live Storage (Power Automate) =========
+const CoverageUpdate_GET_URL  = "https://default597853fc652348b584e620698b1b2b.ff.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/856a30f4ef774aadb4bc00839cb64774/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=34Md9oPkOro6U9jojUQblH-19XhS1hUYpGO3updlN2Y";
+const CoverageUpdate_SAVE_URL = "https://default597853fc652348b584e620698b1b2b.ff.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/2d13479cbfb54706851ba765697fa751/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=C8G-8QRD88_nYJy-uA55m6vis8Oq1FUOvagnwz2Zmew";
+
+// Optional: auto-refresh every 30s for “live view”
+const AUTO_REFRESH_MS = 30000;
+async function loadFromSharePoint() {
+  const res = await fetch(CoverageUpdate_GET_URL, { method: "GET" });
+  if (!res.ok) throw new Error("GET failed: " + res.status);
+  const text = await res.text();
+  // some flows return text; parse safely
+  const json = JSON.parse(text);
+  return json;
+}
+
+async function saveToSharePoint(stateObj) {
+  const res = await fetch(CoverageUpdate_SAVE_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(stateObj),
+  });
+  if (!res.ok) throw new Error("SAVE failed: " + res.status);
+  return await res.text().catch(() => "Saved");
+}
+
+// Simple toast/alert helper (optional)
+function notify(msg) {
+  try { console.log(msg); } catch(e) {}
+  // if your UI has a toast system, call it here
+}
   // ===== Data bootstrapped from your PPT (editable & auto-saved after) =====
   const BOOTSTRAP = {
   "meta": {
@@ -964,40 +995,44 @@
     return (txt||"").split("\n").map(x=>x.trim()).filter(Boolean).map(x=>x.replace(/^\-\s?/,""));
   }
 
-  function loadStore(){
-    const raw = localStorage.getItem(STORE_KEY);
-    if(!raw){
-      const base = {
-        meta: { createdAt: nowISO(), updatedAt: nowISO() },
-        data: deepClone(BOOTSTRAP.countries),
-        ui: {
-          selectedCountry: COUNTRIES[0] || "UAE",
-          selectedQuarter: "Q2 2026",
-          selectedStage: "Regulatory Engaged",
-          selectedDate: toDateInputValue(new Date()),
-          gnStats: {}
-        }
-      };
-      // seed GN stats per country
-      for(const c of COUNTRIES){
-        base.ui.gnStats[c] = { status:"In Planning", operator:"", sites:"" };
-        // set default quarter/stage if GN quarter provided
-        const gnq = (base.data[c].gnQuarter || "").replace("|"," ").replace("  "," ").trim();
-        if(gnq){
-          const q = gnq.toUpperCase().replace("Q","Q").replace(" ", " ").replace("  "," ");
-          // If format like Q2 26 -> map to Q2 2026
-          const mm = gnq.match(/Q(\d)\s*\|?\s*(\d{2})/i);
-          if(mm){
-            const qlbl = `Q${mm[1]} 20${mm[2]}`;
-            if(QUARTERS.includes(qlbl)) base.ui.selectedQuarter = qlbl;
-          }
-        }
-      }
-      localStorage.setItem(STORE_KEY, JSON.stringify(base));
-      return base;
+  async function loadStore(){
+  // 1) Try SharePoint first
+  try{
+    const remote = await loadFromSharePoint();
+    if(remote && typeof remote === "object"){
+      localStorage.setItem(STORE_KEY, JSON.stringify(remote));
+      return remote;
     }
-    try{ return JSON.parse(raw); }catch(e){ return null; }
+  }catch(e){
+    console.warn("SharePoint load failed, fallback to local:", e);
   }
+
+  // 2) Fallback to localStorage
+  const raw = localStorage.getItem(STORE_KEY);
+  if(!raw){
+    const base = {
+      meta: { createdAt: nowISO(), updatedAt: nowISO() },
+      data: deepClone(BOOTSTRAP.countries),
+      ui: {
+        selectedCountry: COUNTRIES[0] || "UAE",
+        selectedQuarter: "Q2 2026",
+        selectedStage: "Regulatory Engaged",
+        selectedDate: toDateInputValue(new Date()),
+        gnStats: {}
+      }
+    };
+
+    // seed GN stats per country
+    for(const c of COUNTRIES){
+      base.ui.gnStats[c] = { status:"In Planning", operator:"", sites:"" };
+    }
+
+    localStorage.setItem(STORE_KEY, JSON.stringify(base));
+    return base;
+  }
+
+  try{ return JSON.parse(raw); }catch(e){ return null; }
+}
 
   function saveStore(store){
     store.meta.updatedAt = nowISO();
@@ -1023,7 +1058,10 @@
     return true;
   }
 
-  let store = loadStore();
+  let store = null;
+
+(async function init(){
+  store = await loadStore();
 
   // ===== Migration: ensure weekly history structure exists =====
   (function migrateToWeekly(){
@@ -1057,9 +1095,27 @@
     saveStore(store);
   })();
 
-  if(!store) alert("Storage load error. Please refresh.");
+  if(!store){
+    alert("Storage load error. Please refresh.");
+    return;
+  }
 
-  // ===== Elements =====
+  renderAll();
+
+  // Optional live refresh (viewers see updates)
+  if(AUTO_REFRESH_MS && AUTO_REFRESH_MS > 0){
+    setInterval(async ()=>{
+      try{
+        const latest = await loadFromSharePoint();
+        if(latest && JSON.stringify(latest) !== JSON.stringify(store)){
+          store = latest;
+          localStorage.setItem(STORE_KEY, JSON.stringify(store));
+          renderAll();
+        }
+      }catch(e){}
+    }, AUTO_REFRESH_MS);
+  }
+})();// ===== Elements =====
   const countrySelect = document.getElementById("countrySelect");
   const quarterSelect = document.getElementById("quarterSelect");
   const stageSelect = document.getElementById("stageSelect");
@@ -1441,7 +1497,7 @@
         }
 
         localStorage.setItem(STORE_KEY, JSON.stringify(payload));
-        store = loadStore();
+        store = await loadStore();
 
         // Run migration again to ensure weekly structure exists
         (function migrateToWeekly(){
@@ -1480,11 +1536,6 @@
       }
     });
   }
-
-
-
-  // Init
-  renderAll();
 </script>
 
 
