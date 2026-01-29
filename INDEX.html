@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<!-- saved from url=(0109)file:///Users/ahmedragab/Downloads/national%20update%20/coverage_progress_dashboard_v3_pulse_pdf_onepage.html -->
+<html lang="en" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coverage Progress Update – Country Dashboard</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./Coverage Progress Update – Country Dashboard_files/css2" rel="stylesheet">
+
+  <!-- PDF Export (same approach as your weekly update app) -->
+  <script src="./Coverage Progress Update – Country Dashboard_files/html2pdf.bundle.min.js"></script>
+
+  <style>
+    :root {
+      --bg1:#0b1020;
+      --bg2:#0a1533;
+      --stroke:rgba(255,255,255,.18);
+      --stroke2:rgba(255,255,255,.28);
+      --text:#eef3ff;
+      --muted:rgba(238,243,255,.72);
+      --shadow:0 24px 80px rgba(0,0,0,.45);
+      --shadow2:0 14px 40px rgba(0,0,0,.30);
+      --radius:22px;
+      --radius2:18px;
+      --blur:18px;
+
+      --good:#22c55e;
+      --warn:#f59e0b;
+      --bad:#ef4444;
+      --info:#60a5fa;
+
+      --brand:#c31422; /* header red */
+      --brand2:#8b0f18;
+      --white:rgba(255,255,255,.92);
+
+      /* Panel base (soft) */
+      --pGreen: rgba(235,247,246,.82);
+      --pPink:  rgba(255,237,237,.82);
+      --pBlue:  rgba(234,244,255,.82);
+      --pAmber: rgba(255,248,235,.82);
+    }
+
+    [data-theme="light"]{
+      --bg1:#f5f8ff;
+      --bg2:#edf3ff;
+      --stroke:rgba(16,24,40,.12);
+      --stroke2:rgba(16,24,40,.18);
+      --text:#0b1324;
+      --muted:rgba(11,19,36,.68);
+      --shadow:0 20px 60px rgba(16,24,40,.12);
+      --shadow2:0 12px 28px rgba(16,24,40,.10);
+      --white:rgba(255,255,255,.96);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 15% 5%, rgba(92,162,255,.20), transparent 55%),
+        radial-gradient(1000px 700px at 90% 10%, rgba(34,197,94,.12), transparent 55%),
+        radial-gradient(1200px 900px at 65% 95%, rgba(255,93,93,.10), transparent 50%),
+        linear-gradient(180deg,var(--bg1),var(--bg2));
+      overflow-x:hidden;
+    }
+
+    .wrap{ max-width:1320px; margin:0 auto; padding:22px 18px 44px; }
+    .card{
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(255,255,255,.13), rgba(255,255,255,.06));
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(var(--blur));
+      overflow:hidden;
+    }
+
+    /* ===== Header (match PPT feel) ===== */
+    .hero{
+      border-radius:28px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:var(--shadow);
+    }
+    .heroTop{
+      padding:22px 20px 18px;
+      background:
+        radial-gradient(900px 260px at 25% 35%, rgba(255,255,255,.18), transparent 60%),
+        radial-gradient(700px 260px at 85% 40%, rgba(255,255,255,.08), transparent 62%),
+        linear-gradient(90deg, var(--brand2), var(--brand));
+      color:rgba(255,255,255,.95);
+      position:relative;
+    }
+    .heroTop .row{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+    }
+    .badgeU{
+      width:54px; height:54px; border-radius:18px;
+      background:rgba(255,255,255,.15);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:950; font-size:26px; border:1px solid rgba(255,255,255,.20);
+      box-shadow:0 18px 40px rgba(0,0,0,.25);
+    }
+    .heroTitle h1{ margin:0; font-size:20.5px; font-weight:950; letter-spacing:.2px; }
+    .heroTitle p{ margin:6px 0 0; font-size:12.8px; opacity:.88; }
+
+    .heroControls{
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:flex-end;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.22);
+      background:rgba(255,255,255,.12);
+      backdrop-filter:blur(var(--blur));
+      box-shadow:0 10px 22px rgba(0,0,0,.14);
+      user-select:none;
+      color:rgba(255,255,255,.95);
+    }
+    .pill label{ font-size:12px; font-weight:900; opacity:.90; }
+    .selectWrap{ position:relative; }
+    select{
+      appearance:none; border:0; outline:none; background:transparent;
+      color:rgba(255,255,255,.95);
+      font-weight:950; font-size:12.6px;
+      padding-right:18px; cursor:pointer;
+    }
+    .chev{
+      position:absolute; right:10px; top:50%;
+      transform:translateY(-45%);
+      width:0;height:0;
+      border-left:5px solid transparent;
+      border-right:5px solid transparent;
+      border-top:6px solid rgba(255,255,255,.80);
+      pointer-events:none;
+    }
+
+    .btn{
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:14px;
+      padding:10px 12px;
+      font-size:12.6px;
+      font-weight:950;
+      color:rgba(255,255,255,.95);
+      background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.08));
+      box-shadow:0 10px 22px rgba(0,0,0,.14);
+      transition:transform .15s ease, filter .2s ease;
+      display:inline-flex; align-items:center; gap:8px; white-space:nowrap;
+    }
+    .btn:hover{ transform:translateY(-1px); filter:brightness(1.05); }
+    .btn:active{ transform:translateY(0); filter:brightness(.98); }
+    .btn.ghost{ background:rgba(255,255,255,.10); }
+    .btn.ok{ border-color:rgba(34,197,94,.35); background:linear-gradient(180deg, rgba(34,197,94,.28), rgba(34,197,94,.14)); }
+
+    /* Theme switch (same logic) */
+    .switch{ display:flex; align-items:center; gap:10px; padding:8px 10px; }
+    .switch span{ font-size:12px; font-weight:950; opacity:.88; }
+    .toggle{ width:46px;height:26px;border-radius:999px;background:rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.24); position:relative; cursor:pointer; transition:background .2s ease; }
+    .toggle::after{ content:""; width:22px;height:22px;border-radius:999px;background:rgba(255,255,255,.96);
+      position:absolute; top:1px; left:1px; transition:transform .2s ease; box-shadow:0 6px 16px rgba(0,0,0,.22); }
+    .toggle.on{ background:rgba(34,197,94,.30); border-color:rgba(34,197,94,.35); }
+    .toggle.on::after{ transform:translateX(20px); }
+
+    .heroBottom{
+      background:rgba(255,255,255,.10);
+      border-top:1px solid rgba(255,255,255,.14);
+      padding:14px 16px 16px;
+    }
+
+    /* ===== Top timeline (Q1 2026 -> Q4 2027) ===== */
+    .topGrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    @media(max-width:980px){ .topGrid{ grid-template-columns:1fr; } }
+
+    .timelineCard{
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:22px;
+      background:rgba(255,255,255,.10);
+      backdrop-filter:blur(var(--blur));
+      padding:14px 14px 10px;
+      position:relative;
+    }
+    .tlHead{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-bottom:10px;
+    }
+    .tlHead .t{ font-weight:950; font-size:13.2px; letter-spacing:.2px; color:rgba(255,255,255,.92); }
+    .tlHead .s{ font-size:12px; opacity:.82; color:rgba(255,255,255,.88); }
+    .timeline{
+      display:grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap:0;
+      align-items:center;
+      position:relative;
+      padding:12px 6px 6px;
+    }
+    .timeline::before{
+      content:"";
+      position:absolute;
+      left:10px; right:10px;
+      top:24px;
+      height:2px;
+      background:rgba(255,255,255,.32);
+    }
+    .qnode{
+      display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer; user-select:none;
+      padding:6px 0;
+    }
+    .qdot{
+      width:15px; height:15px; border-radius:999px;
+      background:rgba(255,255,255,.22);
+      border:2px solid rgba(255,255,255,.42);
+      transition: transform .16s ease, background .2s ease, border-color .2s ease;
+      box-shadow:0 0 0 0 rgba(255,255,255,.0);
+    }
+    .qnode.active .qdot{
+      background:rgba(34,197,94,.95);
+      border-color:rgba(34,197,94,1);
+      transform: scale(1.18);
+      box-shadow:0 0 0 7px rgba(34,197,94,.18);
+    }
+    .qlabel{
+      font-size:11.2px;
+      font-weight:900;
+      color:rgba(255,255,255,.88);
+      opacity:.90;
+      text-align:center;
+      white-space:nowrap;
+    }
+
+    /* ===== Spectrum/GN stage bar (like your small top bar screenshot) ===== */
+    .stageMini{
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:22px;
+      background:rgba(255,255,255,.10);
+      backdrop-filter:blur(var(--blur));
+      padding:14px 14px 12px;
+    }
+    .miniHead{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-bottom:10px;
+    }
+    .miniHead .t{ font-weight:950; font-size:13.2px; color:rgba(255,255,255,.92); }
+    .miniHead .s{ font-size:12px; color:rgba(255,255,255,.85); opacity:.85; }
+
+    .miniBar{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:0;
+      align-items:center;
+      position:relative;
+      padding:10px 6px 2px;
+    }
+    .miniBar::before{
+      content:"";
+      position:absolute;
+      left:10px; right:10px;
+      top:22px;
+      height:2px;
+      background:rgba(255,255,255,.28);
+    }
+    .mnode{
+      display:flex; flex-direction:column; align-items:center; gap:6px;
+      user-select:none;
+    }
+    .mc{
+      width:14px;height:14px;border-radius:999px;
+      background:rgba(255,255,255,.18);
+      border:2px solid rgba(255,255,255,.35);
+      transition:.2s ease;
+    }
+    .mnode.active .mc{
+      background:rgba(96,165,250,.95);
+      border-color:rgba(96,165,250,1);
+      box-shadow:0 0 0 7px rgba(96,165,250,.18);
+      transform:scale(1.15);
+    }
+    .ml{ font-size:11.1px; font-weight:900; color:rgba(255,255,255,.86); opacity:.88; text-align:center; max-width:130px; }
+
+
+    /* ===== Clarity upgrades (timeline + stage bar) ===== */
+    .timelineCard, .stageMini{
+      background:rgba(255,255,255,.18);
+      border-color:rgba(255,255,255,.22);
+    }
+    [data-theme="light"] .timelineCard, 
+    [data-theme="light"] .stageMini{
+      background:rgba(255,255,255,.85);
+      border-color:rgba(16,24,40,.14);
+    }
+
+    .timeline::before, .miniBar::before{
+      background:rgba(255,255,255,.48);
+      height:3px;
+    }
+    [data-theme="light"] .timeline::before, 
+    [data-theme="light"] .miniBar::before{
+      background:rgba(16,24,40,.20);
+    }
+
+    .qlabel, .ml{
+      color:rgba(255,255,255,.96);
+      text-shadow:0 2px 10px rgba(0,0,0,.20);
+      opacity:1;
+    }
+    [data-theme="light"] .qlabel, 
+    [data-theme="light"] .ml{
+      color:rgba(11,19,36,.82);
+      text-shadow:none;
+    }
+
+    .qdot{
+      width:16px;height:16px;
+      background:rgba(255,255,255,.30);
+      border-color:rgba(255,255,255,.70);
+      box-shadow:0 10px 22px rgba(0,0,0,.18);
+    }
+    [data-theme="light"] .qdot{
+      background:rgba(11,19,36,.10);
+      border-color:rgba(11,19,36,.28);
+      box-shadow:0 10px 22px rgba(16,24,40,.10);
+    }
+    .qnode.active .qdot{
+      background:rgba(255,255,255,.98);
+      border-color:rgba(255,255,255,1);
+      box-shadow:0 0 0 8px rgba(34,197,94,.22), 0 14px 30px rgba(0,0,0,.22);
+    }
+    [data-theme="light"] .qnode.active .qdot{
+      background:rgba(34,197,94,.98);
+      border-color:rgba(34,197,94,1);
+      box-shadow:0 0 0 8px rgba(34,197,94,.18), 0 14px 26px rgba(16,24,40,.10);
+    }
+
+    .mc{
+      width:15px;height:15px;
+      background:rgba(255,255,255,.26);
+      border-color:rgba(255,255,255,.62);
+      box-shadow:0 10px 22px rgba(0,0,0,.18);
+    }
+    [data-theme="light"] .mc{
+      background:rgba(11,19,36,.10);
+      border-color:rgba(11,19,36,.26);
+      box-shadow:0 10px 22px rgba(16,24,40,.10);
+    }
+    .mnode.active .mc{
+      background:rgba(255,255,255,.98);
+      border-color:rgba(255,255,255,1);
+      box-shadow:0 0 0 8px rgba(96,165,250,.22), 0 14px 30px rgba(0,0,0,.22);
+    }
+    [data-theme="light"] .mnode.active .mc{
+      background:rgba(96,165,250,.95);
+      border-color:rgba(96,165,250,1);
+      box-shadow:0 0 0 8px rgba(96,165,250,.18), 0 14px 26px rgba(16,24,40,.10);
+    }
+
+    /* ===== Smooth Pulse (Green timeline + Blue stage) ===== */
+    @keyframes softPulseGreen{
+      0%   { transform: scale(1.10); box-shadow: 0 0 0 0 rgba(34,197,94,.22), 0 14px 30px rgba(0,0,0,.18); }
+      55%  { transform: scale(1.18); box-shadow: 0 0 0 14px rgba(34,197,94,.12), 0 18px 40px rgba(0,0,0,.20); }
+      100% { transform: scale(1.10); box-shadow: 0 0 0 0 rgba(34,197,94,.22), 0 14px 30px rgba(0,0,0,.18); }
+    }
+    @keyframes softPulseBlue{
+      0%   { transform: scale(1.08); box-shadow: 0 0 0 0 rgba(96,165,250,.22), 0 14px 30px rgba(0,0,0,.18); }
+      55%  { transform: scale(1.16); box-shadow: 0 0 0 14px rgba(96,165,250,.12), 0 18px 40px rgba(0,0,0,.20); }
+      100% { transform: scale(1.08); box-shadow: 0 0 0 0 rgba(96,165,250,.22), 0 14px 30px rgba(0,0,0,.18); }
+    }
+
+    .qnode.active .qdot{
+      animation: softPulseGreen 2.6s ease-in-out infinite;
+      will-change: transform, box-shadow;
+    }
+    .mnode.active .mc{
+      animation: softPulseBlue 2.6s ease-in-out infinite;
+      will-change: transform, box-shadow;
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .qnode.active .qdot,
+      .mnode.active .mc{ animation:none !important; }
+    }
+
+
+    .tlHead .t, .miniHead .t{
+      color:rgba(255,255,255,.98);
+      text-shadow:0 2px 10px rgba(0,0,0,.20);
+    }
+    [data-theme="light"] .tlHead .t, 
+    [data-theme="light"] .miniHead .t{
+      color:rgba(11,19,36,.92);
+      text-shadow:none;
+    }
+    .tlHead .s, .miniHead .s{
+      color:rgba(255,255,255,.90);
+    }
+    [data-theme="light"] .tlHead .s, 
+    [data-theme="light"] .miniHead .s{
+      color:rgba(11,19,36,.65);
+    }
+
+    /* ===== Main Panels ===== */
+    .content{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media(max-width:900px){ .content{ grid-template-columns:1fr; } }
+
+    .panel{
+      border-radius:24px;
+      overflow:hidden;
+      box-shadow:var(--shadow2);
+      border:1px solid rgba(0,0,0,.08);
+      backdrop-filter: blur(14px);
+      transform:translateY(0);
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .panel:hover{ transform:translateY(-3px); box-shadow:var(--shadow); }
+    .panelHead{
+      padding:14px 16px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      border-bottom:1px solid rgba(0,0,0,.06);
+    }
+    .panelHead .left{
+      display:flex; align-items:center; gap:12px;
+      font-weight:950; font-size:13.2px; letter-spacing:.2px;
+      color:#0b1324;
+    }
+    .pico{
+      width:36px;height:36px;border-radius:14px;
+      background:rgba(255,255,255,.78);
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 10px 20px rgba(0,0,0,.10);
+      border:1px solid rgba(0,0,0,.06);
+      font-size:16px;
+    }
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,.08);
+      background:rgba(255,255,255,.55);
+      color:#0b1324;
+      font-size:12px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .panelBody{ padding:12px 16px 16px; color:#0b1324; }
+
+    ul{ margin:0; padding-left:18px; }
+    li{
+      margin:7px 0;
+      line-height:1.55;
+      font-size:12.9px;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+      color:rgba(11,19,36,.80);
+    }
+    .empty{
+      border:1px dashed rgba(0,0,0,.18);
+      background:rgba(255,255,255,.65);
+      border-radius:18px;
+      padding:14px;
+      color:rgba(11,19,36,.70);
+      font-size:12.6px;
+      line-height:1.55;
+    }
+
+    .bgGreen{ background: linear-gradient(180deg, var(--pGreen), rgba(235,247,246,.72)); }
+    .bgPink{  background: linear-gradient(180deg, var(--pPink),  rgba(255,237,237,.72)); }
+    .bgBlue{  background: linear-gradient(180deg, var(--pBlue),  rgba(234,244,255,.72)); }
+    .bgAmber{ background: linear-gradient(180deg, var(--pAmber), rgba(255,248,235,.72)); }
+
+    /* ===== Bottom compact “Spectrum / GN network” arrows (simple, editable) ===== */
+    .flowRow{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    @media(max-width:980px){ .flowRow{ grid-template-columns:1fr; } }
+
+    .flowCard{
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(255,255,255,.13), rgba(255,255,255,.06));
+      box-shadow:var(--shadow2);
+      backdrop-filter:blur(var(--blur));
+      padding:14px 14px 12px;
+    }
+    .flowHead{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; }
+    .flowHead .t{ font-weight:950; font-size:13.2px; letter-spacing:.2px; }
+    .flowPills{ display:flex; gap:10px; flex-wrap:wrap; }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.08);
+      border-radius:999px;
+      padding:8px 10px;
+      font-size:12px;
+      font-weight:900;
+      color:var(--muted);
+      user-select:none;
+    }
+    .chip b{ color:var(--text); }
+
+    /* PDF: avoid cuts */
+    .hero, .panel, .timelineCard, .stageMini, .flowCard { page-break-inside: avoid; break-inside: avoid; }
+  
+    /* Week date input (calendar picker) */
+    #weekDate{
+      color:rgba(255,255,255,.95);
+      font-weight:950;
+    }
+    #weekDate::-webkit-calendar-picker-indicator{
+      filter: invert(1);
+      opacity:.85;
+      cursor:pointer;
+    }
+    [data-theme="light"] #weekDate{
+      color:rgba(255,255,255,.95);
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="wrap" id="printArea">
+
+    <div class="hero">
+      <div class="heroTop">
+        <div class="row">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div class="badgeU" id="countryBadge">S</div>
+            <div class="heroTitle">
+              <h1><span id="countryTitle">SOUTH AFRICA</span> — Coverage progress update</h1>
+              <p>Live editable • Auto-save per country • Same iOS glass style like your weekly update app</p>
+            </div>
+          </div>
+
+          <div class="heroControls">
+            <div class="pill selectWrap" title="Select Country">
+              <label>Country</label>
+              <select id="countrySelect"><option value="UAE">UAE</option><option value="TURKEY">TURKEY</option><option value="EGYPT">EGYPT</option><option value="OMAN">OMAN</option><option value="OVERALL">OVERALL</option><option value="QATAR">QATAR</option><option value="JORDAN">JORDAN</option><option value="SOUTH AFRICA">SOUTH AFRICA</option><option value="IRAQ">IRAQ</option></select>
+              <div class="chev"></div>
+            </div>
+
+            <div class="pill selectWrap" title="Select Quarter (Timeline)">
+              <label>Quarter</label>
+              <select id="quarterSelect"><option value="Q1 2026">Q1 2026</option><option value="Q2 2026">Q2 2026</option><option value="Q3 2026">Q3 2026</option><option value="Q4 2026">Q4 2026</option><option value="Q1 2027">Q1 2027</option><option value="Q2 2027">Q2 2027</option><option value="Q3 2027">Q3 2027</option><option value="Q4 2027">Q4 2027</option></select>
+              <div class="chev"></div>
+            </div>
+
+            <div class="pill selectWrap" title="Select Spectrum/GN Stage (top bar circles)">
+              <label>Stage</label>
+              <select id="stageSelect"><option value="Regulatory Engaged">Regulatory Engaged</option><option value="Spectrum Allocation">Spectrum Allocation</option><option value="Assignment">Assignment</option><option value="GN Service">GN Service</option></select>
+              <div class="chev"></div>
+            </div>
+
+
+            <div class="pill" title="Select a date to view that week (history)">
+              <label style="font-size:12px; font-weight:900; opacity:.90;">Week Date</label>
+              <input id="weekDate" type="date" style="margin-left:8px; border:0; outline:none; background:transparent; color:rgba(255,255,255,.95); font-weight:950; font-size:12.6px; cursor:pointer;">
+              <span id="weekKeyLabel" style="margin-left:10px; font-size:12px; font-weight:950; opacity:.92;">—</span>
+            </div>
+            <button class="btn ghost" id="jumpLatest" title="Jump to current week">⏱️ Latest</button>
+
+            <button class="btn ghost" id="editBtn">✏️ Edit</button>
+            <button class="btn ok" id="pdfBtn">📄 Export PDF</button>
+
+            <button class="btn ghost" id="exportAllBtn" title="Export ALL countries + ALL weeks (backup)">💾 Export ALL Backup</button>
+            <button class="btn ghost" id="importAllBtn" title="Import backup JSON and restore everything">⬆️ Import ALL Backup</button>
+            <input id="importAllFile" type="file" accept="application/json" style="display:none;">
+
+            <div class="pill switch" title="Theme">
+              <span>Light</span>
+              <div id="themeToggle" class="toggle on" role="switch" aria-checked="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px; opacity:.88; font-size:12px;">
+          Tip: select country → the 4 panels update. Select quarter → timeline circle changes. Select stage → top bar circles change. Select Week Date → view/edit that week's history. Use Export ALL Backup to save everything as one JSON (SharePoint backup).
+        </div>
+      </div>
+
+      <div class="heroBottom">
+        <div class="topGrid">
+          <div class="timelineCard">
+            <div class="tlHead">
+              <div class="t">Timeline (Q1 2026 → Q4 2027)</div>
+              <div class="s" id="timelineHint">Selected: Q4 2026</div>
+            </div>
+            <div class="timeline" id="timeline"><div class="qnode"><div class="qdot"></div><div class="qlabel">Q1
+2026</div></div><div class="qnode"><div class="qdot"></div><div class="qlabel">Q2
+2026</div></div><div class="qnode"><div class="qdot"></div><div class="qlabel">Q3
+2026</div></div><div class="qnode active"><div class="qdot"></div><div class="qlabel">Q4
+2026</div></div><div class="qnode"><div class="qdot"></div><div class="qlabel">Q1
+2027</div></div><div class="qnode"><div class="qdot"></div><div class="qlabel">Q2
+2027</div></div><div class="qnode"><div class="qdot"></div><div class="qlabel">Q3
+2027</div></div><div class="qnode"><div class="qdot"></div><div class="qlabel">Q4
+2027</div></div></div>
+          </div>
+
+          <div class="stageMini">
+            <div class="miniHead">
+              <div class="t">Spectrum &amp; GN — current stage</div>
+              <div class="s" id="gnHint">GN in Service: <b id="gnQuarterTxt">—</b></div>
+            </div>
+            <div class="miniBar" id="miniBar"><div class="mnode active"><div class="mc"></div><div class="ml">Regulatory Engaged</div></div><div class="mnode"><div class="mc"></div><div class="ml">Spectrum Allocation</div></div><div class="mnode"><div class="mc"></div><div class="ml">Assignment</div></div><div class="mnode"><div class="mc"></div><div class="ml">GN Service</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panels -->
+    <div class="content" id="panels">
+      <div class="panel bgPink">
+        <div class="panelHead">
+          <div class="left"><span class="pico">✅</span>Progress Details</div>
+          <span class="tag">SOUTH AFRICA</span>
+        </div>
+        <div class="panelBody"><ul><li>Vodacom is the licensed telecom operator working with us to obtain the required regulatory approvals.</li><li>Spectrum allocation is currently in progress with the relevant authorities.</li><li>No airline commitments have been secured to date.</li><li>Technical readiness is in place, with the solution validated and available to support commercial onboarding once approvals are finalized.</li><li>Commercial discussions with airlines are ongoing, but decisions remain dependent on license issuance and spectrum confirmation.</li></ul></div>
+      </div>
+
+      <div class="panel bgAmber">
+        <div class="panelHead">
+          <div class="left"><span class="pico">⚠️</span>Challenges</div>
+          <span class="tag">Risk / Blockers</span>
+        </div>
+        <div class="panelBody"><ul><li>Regulatory dependency: Airline commitments are delayed pending final license approval and spectrum allocation.</li><li>Market hesitation: Airlines are reluctant to proceed without a confirmed local reference or live commercial deployment.</li><li>Extended timelines: Approval processes are impacting go-to-market schedules and commercial momentum.</li></ul></div>
+      </div>
+
+      <div class="panel bgGreen">
+        <div class="panelHead">
+          <div class="left"><span class="pico">🟩</span>Actions Taken</div>
+          <span class="tag">Done</span>
+        </div>
+        <div class="panelBody"><ul><li>Conducted on-site meetings with the South African communications regulator to fast-track the A2G licensing process.</li></ul></div>
+      </div>
+
+      <div class="panel bgBlue">
+        <div class="panelHead">
+          <div class="left"><span class="pico">➡️</span>Next Steps</div>
+          <span class="tag">Planned</span>
+        </div>
+        <div class="panelBody"><ul><li>Sign a Proof of Concept (PoC) agreement with at least one airline.</li></ul></div>
+      </div>
+    </div>
+
+    <!-- Bottom summary boxes (optional “stats”) -->
+    <div class="flowRow">
+      <div class="flowCard">
+        <div class="flowHead">
+          <div class="t">Quick Status</div>
+          <div class="flowPills">
+            <div class="chip">Country: <b id="chipCountry">SOUTH AFRICA</b></div>
+            <div class="chip">Quarter: <b id="chipQuarter">Q4 2026</b></div>
+            <div class="chip">Stage: <b id="chipStage">Regulatory Engaged</b></div>
+          </div>
+        </div>
+        <div style="font-size:12.4px; color:var(--muted); line-height:1.55;">
+          This area is designed to match the PPT “status look”. You can export a single-page PDF with clear text.
+        </div>
+      </div>
+
+      <div class="flowCard">
+        <div class="flowHead">
+          <div class="t">GN Snapshot (editable)</div>
+          <div class="flowPills">
+            <div class="chip">Operator: <b id="chipOperator">Vodacom</b></div>
+            <div class="chip">GN Sites: <b id="chipSites">36</b></div>
+            <div class="chip">Status: <b id="chipGnStatus">Not Started</b></div>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:8px;">
+          <div class="pill selectWrap" style="border-color:var(--stroke); background:rgba(255,255,255,.08); color:var(--text);">
+            <label style="color:var(--muted);">GN Status</label>
+            <select id="gnStatusSelect" style="color:var(--text);"><option value="Not Started">Not Started</option><option value="In Planning">In Planning</option><option value="In Procurement">In Procurement</option><option value="In Build">In Build</option><option value="In Test">In Test</option><option value="In Service">In Service</option></select>
+            <div class="chev" style="border-top-color:var(--muted);"></div>
+          </div>
+          <div class="pill" style="border-color:var(--stroke); background:rgba(255,255,255,.08);">
+            <label style="color:var(--muted);">Operator</label>
+            <input id="gnOperator" placeholder="e.g., e&amp;, Omantel..." style="width:100%; border:0; outline:none; background:transparent; color:var(--text); font-weight:950; font-size:12.6px;">
+          </div>
+          <div class="pill" style="border-color:var(--stroke); background:rgba(255,255,255,.08);">
+            <label style="color:var(--muted);">GN Sites</label>
+            <input id="gnSites" placeholder="e.g., 91" style="width:100%; border:0; outline:none; background:transparent; color:var(--text); font-weight:950; font-size:12.6px;">
+          </div>
+        </div>
+        <div style="margin-top:10px; font-size:12px; color:var(--muted);">
+          These GN fields are saved per country (so each country can have different GN stats).
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Editor Sheet -->
+  <div class="sheet" id="sheet" style="display: none; position: fixed; inset: 0px; background: rgba(0, 0, 0, 0.45); align-items: flex-end; justify-content: center; padding: 14px; z-index: 60;">
+    <div class="modal" style="width:min(980px,100%); border-radius:26px; border:1px solid var(--stroke); background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.08)); backdrop-filter:blur(var(--blur)); box-shadow:var(--shadow); overflow:hidden; transform:translateY(14px); animation:pop .20s ease forwards;">
+      <style>@keyframes pop{to{transform:translateY(0);}}</style>
+      <div class="modalTop" style="padding:14px 16px; border-bottom:1px solid var(--stroke); display:flex; align-items:center; justify-content:space-between; gap:10px;">
+        <div class="left" style="display:flex; flex-direction:column; gap:3px;">
+          <div class="t" id="modalTitle" style="font-weight:950; font-size:14px; letter-spacing:.2px;">Edit – SOUTH AFRICA</div>
+          <div class="s" style="font-size:12px; color:var(--muted);">One bullet per line. Auto-saved to this country.</div>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <button class="btn" id="cancelEdit">Close</button>
+          <button class="btn ok" id="saveEdit">Save</button>
+        </div>
+      </div>
+
+      <div class="modalBody" style="padding:14px 16px 16px; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div>
+          <div class="fieldLabel" style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:950; letter-spacing:.2px; margin:2px 0 8px 2px; color:var(--text);">✅ Progress Details</div>
+          <textarea id="fieldProgress" placeholder="- ..." style="width:100%; min-height:160px; resize:vertical; border-radius:18px; border:1px solid var(--stroke); background:rgba(0,0,0,.18); color:var(--text); padding:12px; outline:none; font-size:12.7px; line-height:1.5; font-family:Inter,system-ui;"></textarea>
+        </div>
+        <div>
+          <div class="fieldLabel" style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:950; letter-spacing:.2px; margin:2px 0 8px 2px; color:var(--text);">⚠️ Challenges</div>
+          <textarea id="fieldChallenges" placeholder="- ..." style="width:100%; min-height:160px; resize:vertical; border-radius:18px; border:1px solid var(--stroke); background:rgba(0,0,0,.18); color:var(--text); padding:12px; outline:none; font-size:12.7px; line-height:1.5; font-family:Inter,system-ui;"></textarea>
+        </div>
+        <div>
+          <div class="fieldLabel" style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:950; letter-spacing:.2px; margin:2px 0 8px 2px; color:var(--text);">🟩 Actions Taken</div>
+          <textarea id="fieldActions" placeholder="- ..." style="width:100%; min-height:160px; resize:vertical; border-radius:18px; border:1px solid var(--stroke); background:rgba(0,0,0,.18); color:var(--text); padding:12px; outline:none; font-size:12.7px; line-height:1.5; font-family:Inter,system-ui;"></textarea>
+        </div>
+        <div>
+          <div class="fieldLabel" style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:950; letter-spacing:.2px; margin:2px 0 8px 2px; color:var(--text);">➡️ Next Steps</div>
+          <textarea id="fieldNext" placeholder="- ..." style="width:100%; min-height:160px; resize:vertical; border-radius:18px; border:1px solid var(--stroke); background:rgba(0,0,0,.18); color:var(--text); padding:12px; outline:none; font-size:12.7px; line-height:1.5; font-family:Inter,system-ui;"></textarea>
+        </div>
+        <div style="grid-column:1/-1; display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:4px;">
+          <div>
+            <div class="fieldLabel" style="margin-bottom:8px;">🗓 GN in Service (e.g., Q2 26)</div>
+            <input id="fieldGnQuarter" placeholder="Q2 26" style="width:100%; border-radius:16px; border:1px solid var(--stroke); background:rgba(0,0,0,.18); color:var(--text); padding:12px; outline:none; font-weight:950; font-size:12.7px;">
+          </div>
+          <div>
+            <div class="fieldLabel" style="margin-bottom:8px;">🧭 Quarter selection default</div>
+            <select id="fieldDefaultQuarter" style="width:100%; border-radius:16px; border:1px solid var(--stroke); background:rgba(0,0,0,.18); color:var(--text); padding:12px; outline:none; font-weight:950; font-size:12.7px;"><option value="Q1 2026">Q1 2026</option><option value="Q2 2026">Q2 2026</option><option value="Q3 2026">Q3 2026</option><option value="Q4 2026">Q4 2026</option><option value="Q1 2027">Q1 2027</option><option value="Q2 2027">Q2 2027</option><option value="Q3 2027">Q3 2027</option><option value="Q4 2027">Q4 2027</option></select>
+          </div>
+          <div>
+            <div class="fieldLabel" style="margin-bottom:8px;">🔵 Stage default</div>
+            <select id="fieldDefaultStage" style="width:100%; border-radius:16px; border:1px solid var(--stroke); background:rgba(0,0,0,.18); color:var(--text); padding:12px; outline:none; font-weight:950; font-size:12.7px;"><option value="Regulatory Engaged">Regulatory Engaged</option><option value="Spectrum Allocation">Spectrum Allocation</option><option value="Assignment">Assignment</option><option value="GN Service">GN Service</option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // ===== Data bootstrapped from your PPT (editable & auto-saved after) =====
+  const BOOTSTRAP = {
+  "meta": {
+    "createdFrom": "Coverage progress PPT",
+    "generatedAt": "2026-01-28T08:08:22.154582Z"
+  },
+  "countries": {
+    "UAE": {
+      "actions": [
+        "TDRA Engaged, e& selected",
+        "Public Consultancy from TDRA (Feb,25)",
+        "RFI From TDRA (July,25)",
+        "TDRA consider Allocation for A2G",
+        "TDRA agree for Direct Assignment to e&",
+        "SkyFive Arabia and e& agreed on NaaS model",
+        "e& and SkyFive Arabia agreed on the commercial Agreement subject of Spectrum Cost"
+      ],
+      "challenges": [
+        "e& to have a meeting with TDRA to agree on final Spectrum prices (Q1 26)",
+        "TDAR to assign the Spectrum to e& (Q2 26)",
+        "SkyFive Arabia to sign final commercial Agreement with e& (Q2 26)",
+        "Start GN in UAE (Q2 26)"
+      ],
+      "nextSteps": [
+        "Progress Details",
+        "UAE UPDATES"
+      ],
+      "progress": [
+        "UAE UPDATES"
+      ],
+      "gnQuarter": "Q2 26"
+    },
+    "TURKEY": {
+      "actions": [
+        "BTK Engaged, Turkcell selected",
+        "SkyFive Arabia Signed agreement with Turkcell (Feb 25)",
+        "POC planning done, Trial Spectrum requested (Mar 26)",
+        "BTK promised to approve trial Spectrum by Q2 25",
+        "BTK delayed decision du to 5G Spectrum Auction",
+        "BTK decided to Assign the Spectrum to TurkSAT to decide how to use it"
+      ],
+      "challenges": [
+        "Reach agreement with TurkSAT (Q1 26)",
+        "SkyFive Arabia to sign final GN commercial Agreement (Q2 26)",
+        "Start GN (Q3 26)"
+      ],
+      "nextSteps": [
+        "Progress Details",
+        "TURKEY UPDATES"
+      ],
+      "progress": [
+        "TURKEY UPDATES"
+      ],
+      "gnQuarter": "Q3 26"
+    },
+    "EGYPT": {
+      "actions": [
+        "TRA Engaged, local partner AITA",
+        "TRA Approved subject to Security Authorities Approval",
+        "We selected as GN partner",
+        "Planning Done",
+        "Commercial Agreement with AITA/we pending on spectrum assignment."
+      ],
+      "challenges": [
+        "Waiting for feedback form Security Authorities (Change in leadership and Geopolitical situation cause delay)"
+      ],
+      "nextSteps": [
+        "Progress Details",
+        "EGYPT UPDATES"
+      ],
+      "progress": [
+        "EGYPT UPDATES"
+      ],
+      "gnQuarter": "Q4 26"
+    },
+    "OMAN": {
+      "actions": [
+        "TRA Engaged, Omantel selected",
+        "Agreement signed with Omantel (Dec,25)",
+        "TRA consider Allocation for A2G",
+        "TRA in direct to assignmen spectrum to Omantel",
+        "SkyFive Arabia and Omantel agreed on NaaS model",
+        "S5A facilitated Nokia connection with Omantel and offer submited",
+        "Omantel preparing the commercial offer for NaaS",
+        "S5A & Omantel have a meeting 20 Jan,26 with TRA for Spectrum assignment discussion"
+      ],
+      "challenges": [
+        "TRA to assign spectrum to Omantel (Q2 26)",
+        "POC in Oman (Q3 26)",
+        "S5A to sign final commercial Agreement with Omantel (Q2 26)",
+        "Start GN in Oman (Q4 26)"
+      ],
+      "nextSteps": [
+        "Progress Details",
+        "OMAN UPDATES"
+      ],
+      "progress": [
+        "OMAN UPDATES"
+      ],
+      "gnQuarter": "Q4 26"
+    },
+    "OVERALL": {
+      "progress": [
+        "S5A participate in  ASMG meetings. (Sep 25)",
+        "S5A part of ASMG Work Group 8 intended to decide on n S-band allocation across Arab Countries (Sep 25)",
+        "S5A indirectly contributed to White paper Highlighting the importance of A2G Spectrum allocation in Arab region",
+        "S5A influenced WRC-27 Agenda with A2G topic",
+        "S5A Engaged with most regulators in the region",
+        "Nokia presence in certain countries",
+        "Radio Equipment lead time",
+        "Radio Product roadmap"
+      ],
+      "challenges": [
+        "S5A connecting operators with Nokia and facilitate presence",
+        "S5A signed agreement with Nokia to guaranty product continuity",
+        "S5A having bi-weekly call with Nokia to adjust demand planning and shorten lead time"
+      ],
+      "actions": [],
+      "nextSteps": [
+        "ITU & 3gpp recommendation",
+        "Regulators has no clear direction",
+        "Country by country Scenario",
+        "Spectrum Cost"
+      ],
+      "gnQuarter": ""
+    }
+  ,
+    "QATAR": {
+    "progress": [],
+    "challenges": [],
+    "actions": [],
+    "nextSteps": [],
+    "gnQuarter": ""
+},
+    "JORDAN": {
+    "progress": [],
+    "challenges": [],
+    "actions": [],
+    "nextSteps": [],
+    "gnQuarter": ""
+},
+    "SOUTH AFRICA": {
+    "progress": [],
+    "challenges": [],
+    "actions": [],
+    "nextSteps": [],
+    "gnQuarter": ""
+},
+    "IRAQ": {
+    "progress": [],
+    "challenges": [],
+    "actions": [],
+    "nextSteps": [],
+    "gnQuarter": ""
+}
+  }
+};
+
+  // ===== Config =====
+  const COUNTRIES = Object.keys(BOOTSTRAP.countries);
+  const QUARTERS = [
+    "Q1 2026","Q2 2026","Q3 2026","Q4 2026",
+    "Q1 2027","Q2 2027","Q3 2027","Q4 2027"
+  ];
+  const STAGES = ["Regulatory Engaged","Spectrum Allocation","Assignment","GN Service"];
+  const GN_STATUSES = ["Not Started","In Planning","In Procurement","In Build","In Test","In Service"];
+
+  const STORE_KEY = "coverage_progress_v1";
+  const THEME_KEY = "coverage_theme_v1";
+
+  function nowISO(){ return new Date().toISOString(); }
+  function deepClone(o){ return JSON.parse(JSON.stringify(o)); }
+
+  // ===== Week helpers (history per week, controlled by calendar picker) =====
+  function toDateInputValue(d){
+    const tzOff = d.getTimezoneOffset() * 60000;
+    const local = new Date(d.getTime() - tzOff);
+    return local.toISOString().slice(0,10);
+  }
+  function getWeekKey(date = new Date()){
+    // ISO week: YYYY-Www
+    const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    const dayNum = d.getUTCDay() || 7;
+    d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+    const yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+    const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+    return `${d.getUTCFullYear()}-W${String(weekNo).padStart(2,"0")}`;
+  }
+
+  function escapeHtml(str){
+    return (str||"")
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;");
+  }
+  function listToText(arr){
+    return (arr||[]).map(x=>{
+      const t=(x||"").trim();
+      return t.startsWith("-") ? t : "- " + t;
+    }).join("\n");
+  }
+  function textToList(txt){
+    return (txt||"").split("\n").map(x=>x.trim()).filter(Boolean).map(x=>x.replace(/^\-\s?/,""));
+  }
+
+  function loadStore(){
+    const raw = localStorage.getItem(STORE_KEY);
+    if(!raw){
+      const base = {
+        meta: { createdAt: nowISO(), updatedAt: nowISO() },
+        data: deepClone(BOOTSTRAP.countries),
+        ui: {
+          selectedCountry: COUNTRIES[0] || "UAE",
+          selectedQuarter: "Q2 2026",
+          selectedStage: "Regulatory Engaged",
+          selectedDate: toDateInputValue(new Date()),
+          gnStats: {}
+        }
+      };
+      // seed GN stats per country
+      for(const c of COUNTRIES){
+        base.ui.gnStats[c] = { status:"In Planning", operator:"", sites:"" };
+        // set default quarter/stage if GN quarter provided
+        const gnq = (base.data[c].gnQuarter || "").replace("|"," ").replace("  "," ").trim();
+        if(gnq){
+          const q = gnq.toUpperCase().replace("Q","Q").replace(" ", " ").replace("  "," ");
+          // If format like Q2 26 -> map to Q2 2026
+          const mm = gnq.match(/Q(\d)\s*\|?\s*(\d{2})/i);
+          if(mm){
+            const qlbl = `Q${mm[1]} 20${mm[2]}`;
+            if(QUARTERS.includes(qlbl)) base.ui.selectedQuarter = qlbl;
+          }
+        }
+      }
+      localStorage.setItem(STORE_KEY, JSON.stringify(base));
+      return base;
+    }
+    try{ return JSON.parse(raw); }catch(e){ return null; }
+  }
+
+  function saveStore(store){
+    store.meta.updatedAt = nowISO();
+    localStorage.setItem(STORE_KEY, JSON.stringify(store));
+  }
+
+  function downloadJSON(obj, filename){
+    const blob = new Blob([JSON.stringify(obj, null, 2)], {type:"application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url), 4000);
+  }
+
+  function isValidBackup(payload){
+    if(!payload || typeof payload !== "object") return false;
+    if(!payload.data || typeof payload.data !== "object") return false;
+    // ui/meta are expected but not mandatory for restore
+    return true;
+  }
+
+  let store = loadStore();
+
+  // ===== Migration: ensure weekly history structure exists =====
+  (function migrateToWeekly(){
+    if(!store || !store.data) return;
+    const defaultWeek = getWeekKey(new Date());
+    for(const c of Object.keys(store.data)){
+      const entry = store.data[c] || (store.data[c] = {});
+      entry.weeks = entry.weeks || {};
+      // If there is no weekly data yet, seed from legacy arrays (progress/challenges/actions/nextSteps)
+      if(Object.keys(entry.weeks).length === 0){
+        const legacyProgress = entry.progress || entry.progressDetails || [];
+        const legacyChallenges = entry.challenges || [];
+        const legacyActions = entry.actions || [];
+        const legacyNext = entry.nextSteps || [];
+        // Only seed if any legacy content exists
+        if((legacyProgress && legacyProgress.length) || (legacyChallenges && legacyChallenges.length) || (legacyActions && legacyActions.length) || (legacyNext && legacyNext.length)){
+          entry.weeks[defaultWeek] = {
+            progress: legacyProgress.slice(),
+            challenges: legacyChallenges.slice(),
+            actions: legacyActions.slice(),
+            nextSteps: legacyNext.slice(),
+            updatedAt: nowISO()
+          };
+        }
+      }
+      // Keep legacy fields (do not delete) for safety/backward compatibility
+    }
+    // Ensure selectedDate exists
+    if(!store.ui) store.ui = {};
+    if(!store.ui.selectedDate) store.ui.selectedDate = toDateInputValue(new Date());
+    saveStore(store);
+  })();
+
+  if(!store) alert("Storage load error. Please refresh.");
+
+  // ===== Elements =====
+  const countrySelect = document.getElementById("countrySelect");
+  const quarterSelect = document.getElementById("quarterSelect");
+  const stageSelect = document.getElementById("stageSelect");
+  const weekDate = document.getElementById("weekDate");
+  const weekKeyLabel = document.getElementById("weekKeyLabel");
+  const jumpLatest = document.getElementById("jumpLatest");
+  const timelineEl = document.getElementById("timeline");
+  const miniBarEl = document.getElementById("miniBar");
+  const panelsEl = document.getElementById("panels");
+
+  const countryBadge = document.getElementById("countryBadge");
+  const countryTitle = document.getElementById("countryTitle");
+  const timelineHint = document.getElementById("timelineHint");
+  const gnQuarterTxt = document.getElementById("gnQuarterTxt");
+
+  const chipCountry = document.getElementById("chipCountry");
+  const chipQuarter = document.getElementById("chipQuarter");
+  const chipStage = document.getElementById("chipStage");
+
+  const gnStatusSelect = document.getElementById("gnStatusSelect");
+  const gnOperator = document.getElementById("gnOperator");
+  const gnSites = document.getElementById("gnSites");
+
+  const chipOperator = document.getElementById("chipOperator");
+  const chipSites = document.getElementById("chipSites");
+  const chipGnStatus = document.getElementById("chipGnStatus");
+
+  const editBtn = document.getElementById("editBtn");
+  const pdfBtn = document.getElementById("pdfBtn");
+  const exportAllBtn = document.getElementById("exportAllBtn");
+  const importAllBtn = document.getElementById("importAllBtn");
+  const importAllFile = document.getElementById("importAllFile");
+
+  // Editor
+  const sheet = document.getElementById("sheet");
+  const cancelEdit = document.getElementById("cancelEdit");
+  const saveEdit = document.getElementById("saveEdit");
+  const modalTitle = document.getElementById("modalTitle");
+  const fieldProgress = document.getElementById("fieldProgress");
+  const fieldChallenges = document.getElementById("fieldChallenges");
+  const fieldActions = document.getElementById("fieldActions");
+  const fieldNext = document.getElementById("fieldNext");
+  const fieldGnQuarter = document.getElementById("fieldGnQuarter");
+  const fieldDefaultQuarter = document.getElementById("fieldDefaultQuarter");
+  const fieldDefaultStage = document.getElementById("fieldDefaultStage");
+
+  // Theme
+  const themeToggle = document.getElementById("themeToggle");
+  const themeStored = localStorage.getItem(THEME_KEY) || "light";
+  document.documentElement.setAttribute("data-theme", themeStored);
+  themeToggle.classList.toggle("on", themeStored === "light");
+  themeToggle.setAttribute("aria-checked", themeStored === "light" ? "true" : "false");
+  themeToggle.addEventListener("click", ()=>{
+    const current = document.documentElement.getAttribute("data-theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem(THEME_KEY, next);
+    themeToggle.classList.toggle("on", next === "light");
+    themeToggle.setAttribute("aria-checked", next === "light" ? "true" : "false");
+  });
+
+  // ===== Render helpers =====
+  function bulletsToHTML(arr){
+    if(!arr || arr.length===0) return `<div class="empty">No items yet. Click <b>Edit</b> to add bullets.</div>`;
+    return `<ul>${arr.map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul>`;
+  }
+
+  function renderSelects(){
+    countrySelect.innerHTML = COUNTRIES.map(c=>`<option value="${c}">${c}</option>`).join("");
+    countrySelect.value = store.ui.selectedCountry;
+
+    quarterSelect.innerHTML = QUARTERS.map(q=>`<option value="${q}">${q}</option>`).join("");
+    quarterSelect.value = store.ui.selectedQuarter;
+
+    stageSelect.innerHTML = STAGES.map(s=>`<option value="${s}">${s}</option>`).join("");
+    stageSelect.value = store.ui.selectedStage;
+
+    gnStatusSelect.innerHTML = GN_STATUSES.map(s=>`<option value="${s}">${s}</option>`).join("");
+    gnStatusSelect.value = (store.ui.gnStats[store.ui.selectedCountry]?.status) || "In Planning";
+
+    // Week (calendar picker)
+    if(weekDate){
+      weekDate.value = store.ui.selectedDate || toDateInputValue(new Date());
+    }
+
+  }
+
+  function renderTimeline(){
+    timelineEl.innerHTML = "";
+    QUARTERS.forEach(q=>{
+      const n = document.createElement("div");
+      n.className = "qnode" + (q===store.ui.selectedQuarter ? " active" : "");
+      n.innerHTML = `<div class="qdot"></div><div class="qlabel">${q.replace(" ","\n")}</div>`;
+      n.addEventListener("click", ()=>{
+        store.ui.selectedQuarter = q;
+        quarterSelect.value = q;
+        saveStore(store);
+        renderAll();
+      });
+      timelineEl.appendChild(n);
+    });
+    timelineHint.textContent = "Selected: " + store.ui.selectedQuarter;
+  }
+
+  function renderMiniBar(){
+    miniBarEl.innerHTML = "";
+    STAGES.forEach(s=>{
+      const n = document.createElement("div");
+      n.className = "mnode" + (s===store.ui.selectedStage ? " active" : "");
+      n.innerHTML = `<div class="mc"></div><div class="ml">${s}</div>`;
+      miniBarEl.appendChild(n);
+    });
+  }
+
+  function renderHeader(){
+    const c = store.ui.selectedCountry;
+    countryTitle.textContent = c;
+    countryBadge.textContent = (c||"U").trim().slice(0,1).toUpperCase();
+    chipCountry.textContent = c;
+    chipQuarter.textContent = store.ui.selectedQuarter;
+    chipStage.textContent = store.ui.selectedStage;
+
+    const entry = store.data[c] || {};
+    gnQuarterTxt.textContent = entry.gnQuarter ? entry.gnQuarter.replace("|"," ") : "—";
+
+    // Week label
+    const d = store.ui.selectedDate ? new Date(store.ui.selectedDate + "T00:00:00") : new Date();
+    const wk = getWeekKey(d);
+    if(weekKeyLabel) weekKeyLabel.textContent = wk;
+
+    // Improve date input colors per theme
+    if(weekDate){
+      const theme = document.documentElement.getAttribute("data-theme") || "light";
+      weekDate.style.color = theme === "light" ? "rgba(255,255,255,.95)" : "rgba(255,255,255,.95)";
+    }
+  }
+
+  function renderPanels(){
+    const c = store.ui.selectedCountry;
+    const countryEntry = store.data[c] || {};
+    const d = store.ui.selectedDate ? new Date(store.ui.selectedDate + "T00:00:00") : new Date();
+    const weekKey = getWeekKey(d);
+
+    const weeks = countryEntry.weeks || {};
+    const w = weeks[weekKey] || { progress:[], challenges:[], actions:[], nextSteps:[] };
+
+    const progress = w.progress || [];
+    const challenges = w.challenges || [];
+    const actions = w.actions || [];
+    const nextSteps = w.nextSteps || [];
+
+
+    panelsEl.innerHTML = `
+      <div class="panel bgPink">
+        <div class="panelHead">
+          <div class="left"><span class="pico">✅</span>Progress Details</div>
+          <span class="tag">${escapeHtml(c)}</span>
+        </div>
+        <div class="panelBody">${bulletsToHTML(progress)}</div>
+      </div>
+
+      <div class="panel bgAmber">
+        <div class="panelHead">
+          <div class="left"><span class="pico">⚠️</span>Challenges</div>
+          <span class="tag">Risk / Blockers</span>
+        </div>
+        <div class="panelBody">${bulletsToHTML(challenges)}</div>
+      </div>
+
+      <div class="panel bgGreen">
+        <div class="panelHead">
+          <div class="left"><span class="pico">🟩</span>Actions Taken</div>
+          <span class="tag">Done</span>
+        </div>
+        <div class="panelBody">${bulletsToHTML(actions)}</div>
+      </div>
+
+      <div class="panel bgBlue">
+        <div class="panelHead">
+          <div class="left"><span class="pico">➡️</span>Next Steps</div>
+          <span class="tag">Planned</span>
+        </div>
+        <div class="panelBody">${bulletsToHTML(nextSteps)}</div>
+      </div>
+    `;
+  }
+
+  function renderGnStats(){
+    const c = store.ui.selectedCountry;
+    const st = store.ui.gnStats[c] || { status:"In Planning", operator:"", sites:"" };
+
+    // inputs
+    gnStatusSelect.value = st.status || "In Planning";
+    gnOperator.value = st.operator || "";
+    gnSites.value = st.sites || "";
+
+    // chips
+    chipOperator.textContent = st.operator || "—";
+    chipSites.textContent = st.sites || "—";
+    chipGnStatus.textContent = st.status || "—";
+  }
+
+  function renderAll(){
+    renderSelects();
+    renderHeader();
+    renderTimeline();
+    renderMiniBar();
+    renderPanels();
+    renderGnStats();
+  }
+
+  // ===== Handlers =====
+  countrySelect.addEventListener("change", ()=>{
+    store.ui.selectedCountry = countrySelect.value;
+    // per-country GN fields
+    saveStore(store);
+    renderAll();
+  });
+
+  quarterSelect.addEventListener("change", ()=>{
+    store.ui.selectedQuarter = quarterSelect.value;
+    saveStore(store);
+    renderAll();
+  });
+
+  stageSelect.addEventListener("change", ()=>{
+    store.ui.selectedStage = stageSelect.value;
+    saveStore(store);
+    renderAll();
+  });
+
+  // Week date (history) selector
+  if(weekDate){
+    weekDate.addEventListener("change", ()=>{
+      store.ui.selectedDate = weekDate.value || toDateInputValue(new Date());
+      saveStore(store);
+      renderAll();
+    });
+  }
+  if(jumpLatest){
+    jumpLatest.addEventListener("click", ()=>{
+      store.ui.selectedDate = toDateInputValue(new Date());
+      saveStore(store);
+      renderAll();
+    });
+  }
+
+
+  gnStatusSelect.addEventListener("change", ()=>{
+    const c = store.ui.selectedCountry;
+    store.ui.gnStats[c] = store.ui.gnStats[c] || {};
+    store.ui.gnStats[c].status = gnStatusSelect.value;
+    saveStore(store);
+    renderGnStats();
+  });
+  gnOperator.addEventListener("input", ()=>{
+    const c = store.ui.selectedCountry;
+    store.ui.gnStats[c] = store.ui.gnStats[c] || {};
+    store.ui.gnStats[c].operator = gnOperator.value;
+    saveStore(store);
+    renderGnStats();
+  });
+  gnSites.addEventListener("input", ()=>{
+    const c = store.ui.selectedCountry;
+    store.ui.gnStats[c] = store.ui.gnStats[c] || {};
+    store.ui.gnStats[c].sites = gnSites.value;
+    saveStore(store);
+    renderGnStats();
+  });
+
+  // Editor open
+  editBtn.addEventListener("click", ()=>{
+    const c = store.ui.selectedCountry;
+    const entry = store.data[c] || (store.data[c]={});
+    entry.weeks = entry.weeks || {};
+    const d = store.ui.selectedDate ? new Date(store.ui.selectedDate + "T00:00:00") : new Date();
+    const weekKey = getWeekKey(d);
+    const w = entry.weeks[weekKey] || { progress:[], challenges:[], actions:[], nextSteps:[] };
+    modalTitle.textContent = `Edit – ${c} (${weekKey})`;
+    fieldProgress.value = listToText(w.progress || []);
+    fieldChallenges.value = listToText(w.challenges || []);
+    fieldActions.value = listToText(w.actions || []);
+    fieldNext.value = listToText(w.nextSteps || []);
+    fieldGnQuarter.value = entry.gnQuarter || "";
+
+    fieldDefaultQuarter.innerHTML = QUARTERS.map(q=>`<option value="${q}">${q}</option>`).join("");
+    fieldDefaultQuarter.value = store.ui.selectedQuarter;
+
+    fieldDefaultStage.innerHTML = STAGES.map(s=>`<option value="${s}">${s}</option>`).join("");
+    fieldDefaultStage.value = store.ui.selectedStage;
+
+    sheet.style.display = "flex";
+  });
+  cancelEdit.addEventListener("click", ()=> sheet.style.display="none");
+  sheet.addEventListener("click",(e)=>{ if(e.target===sheet) sheet.style.display="none"; });
+
+  // Save edits
+  saveEdit.addEventListener("click", ()=>{
+    const c = store.ui.selectedCountry;
+    const entry = store.data[c] || (store.data[c]={});
+    entry.weeks = entry.weeks || {};
+
+    const d = store.ui.selectedDate ? new Date(store.ui.selectedDate + "T00:00:00") : new Date();
+    const weekKey = getWeekKey(d);
+
+    entry.weeks[weekKey] = {
+      progress: textToList(fieldProgress.value),
+      challenges: textToList(fieldChallenges.value),
+      actions: textToList(fieldActions.value),
+      nextSteps: textToList(fieldNext.value),
+      updatedAt: nowISO()
+    };
+
+    entry.gnQuarter = (fieldGnQuarter.value||"").trim();
+
+    // set defaults from editor
+    store.ui.selectedQuarter = fieldDefaultQuarter.value;
+    store.ui.selectedStage = fieldDefaultStage.value;
+
+    saveStore(store);
+    sheet.style.display="none";
+    renderAll();
+  });
+
+  // PDF export (high clarity, single-page friendly)
+  pdfBtn.addEventListener("click", async ()=>{
+    const element = document.getElementById("printArea");
+
+    const d = store.ui.selectedDate ? new Date(store.ui.selectedDate + "T00:00:00") : new Date();
+    const weekKey = getWeekKey(d);
+    const fname = `Coverage_Update_${store.ui.selectedCountry}_${weekKey}_${store.ui.selectedQuarter.replace(" ","")}.pdf`;
+
+    const opt = {
+      margin: [6,6,8,6],
+      filename: fname,
+      image: { type: "jpeg", quality: 0.99 },
+      html2canvas: {
+        scale: 3,              // <-- more clear
+        useCORS: true,
+        backgroundColor: null,
+        letterRendering: true,
+        windowWidth: 1320
+      },
+      jsPDF: { unit: "mm", format: "a3", orientation: "landscape" },  // landscape to keep all dashboard in 1 page
+      pagebreak: { mode: ["avoid-all","css","legacy"] }
+    };
+
+    try{
+      await html2pdf().set(opt).from(element).save();
+    } catch(e) {
+      alert("PDF export error: " + e.message);
+    }
+  });
+
+  // ===== Export / Import ALL Backup (JSON) =====
+  if(exportAllBtn){
+    exportAllBtn.addEventListener("click", ()=>{
+      saveStore(store);
+      const d = new Date();
+      const fname = `Coverage_All_Backup_${toDateInputValue(d)}_${d.toTimeString().slice(0,8).replaceAll(":","")}.json`;
+      downloadJSON(store, fname);
+    });
+  }
+
+  if(importAllBtn && importAllFile){
+    importAllBtn.addEventListener("click", ()=> importAllFile.click());
+
+    importAllFile.addEventListener("change", async ()=>{
+      const file = importAllFile.files && importAllFile.files[0];
+      if(!file) return;
+      try{
+        const text = await file.text();
+        const payload = JSON.parse(text);
+
+        if(!isValidBackup(payload)){
+          alert("Invalid backup file. Please choose a JSON exported from this dashboard (Export ALL Backup).");
+          importAllFile.value = "";
+          return;
+        }
+
+        localStorage.setItem(STORE_KEY, JSON.stringify(payload));
+        store = loadStore();
+
+        // Run migration again to ensure weekly structure exists
+        (function migrateToWeekly(){
+          if(!store || !store.data) return;
+          const defaultWeek = getWeekKey(new Date());
+          for(const c of Object.keys(store.data)){
+            const entry = store.data[c] || (store.data[c] = {});
+            entry.weeks = entry.weeks || {};
+            if(Object.keys(entry.weeks).length === 0){
+              const legacyProgress = entry.progress || entry.progressDetails || [];
+              const legacyChallenges = entry.challenges || [];
+              const legacyActions = entry.actions || [];
+              const legacyNext = entry.nextSteps || [];
+              if((legacyProgress && legacyProgress.length) || (legacyChallenges && legacyChallenges.length) || (legacyActions && legacyActions.length) || (legacyNext && legacyNext.length)){
+                entry.weeks[defaultWeek] = {
+                  progress: legacyProgress.slice(),
+                  challenges: legacyChallenges.slice(),
+                  actions: legacyActions.slice(),
+                  nextSteps: legacyNext.slice(),
+                  updatedAt: nowISO()
+                };
+              }
+            }
+          }
+          if(!store.ui) store.ui = {};
+          if(!store.ui.selectedDate) store.ui.selectedDate = toDateInputValue(new Date());
+          saveStore(store);
+        })();
+
+        renderAll();
+        alert("Backup imported successfully ✅");
+      } catch(e){
+        alert("Import failed: " + e.message);
+      } finally {
+        importAllFile.value = "";
+      }
+    });
+  }
+
+
+
+  // Init
+  renderAll();
+</script>
+
+
+</body></html>
